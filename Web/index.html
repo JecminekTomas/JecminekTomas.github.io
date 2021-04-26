@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="cs">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <title>Pohyb pouště v oblasti Sahelu</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+
+  <script src="plugins/Side-by-side/leaflet-side-by-side.min.js"></script>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+</head>
+
+<body>
+  <div class="px-4 pt-5 my-5 text-block">
+    <h1 class="display-4 fw-bold text-center">Sahel</h1>
+    <div class="col-lg-6 mx-auto border-bottom">
+      <p class="lead mb-4">Cílem této webové prezentace je ukázat, jakým způsobem se za posledních 20 let (2000 - 2020)
+        změnila poušť v oblasti Sahelu. Autor prezentace mapuje změny v oblasti zemí, které se v roce 2007 zavázali
+        dodržovat iniciativu “The Great Green Wall for the Sahara and the Sahel Initiative (GGW)”, což je pan-Africký
+        program se silným důrazem na zalesnění. (Leroux et al., 2019, s. 1).</p>
+      <h5>Země, které se přidaly ke GGW: </h5>
+      <br>
+      <div class="row row-cols-2 row-cols-md-4 g-4">
+        <div class="col">
+          <div class="card border-0 h-50">
+            <img src="img/Senegal.svg" class="card-img-top" alt="Senegal">
+            <div class="card-body">
+              <h6 class="card-title">Senegal</h6>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card border-0 h-50 ">
+            <img src="img/Mauritania.svg" class="card-img-top" alt="Mauritania">
+            <div class="card-body">
+              <h6 class="card-title">Mauritánie</h6>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card border-0 h-50">
+            <img src="img/Mali.svg" class="card-img-top" alt="Mali">
+            <div class="card-body">
+              <h6 class="card-title">Mali</h6>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card border-0 h-50">
+            <img src="img/Niger.svg" class="card-img-top" alt="Niger">
+            <div class="card-body">
+              <h6 class="card-title">Niger</h6>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card border-0 h-50">
+            <img src="img/Sudan.svg" class="card-img-top" alt="Sudan">
+            <div class="card-body">
+              <h6 class="card-title">Súdán</h6>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card border-0 h-50">
+            <img src="img/Chad.svg" class="card-img-top" alt="Chad">
+            <div class="card-body">
+              <h6 class="card-title">Čad</h6>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card border-0 h-50">
+            <img src="img/Burkina_Faso.svg" class="card-img-top" alt="Burkina_Faso">
+            <div class="card-body">
+              <h6 class="card-title">Burkina Faso</h6>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card border-0 h-50">
+            <img src="img/Djibouti.svg" class="card-img-top" alt="Djibouti">
+            <div class="card-body">
+              <h6 class="card-title">Džibuti</h6>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card border-0 h-5">
+            <img src="img/Eritrea.svg" class="card-img-top" alt="Eritrea">
+            <div class="card-body">
+              <h6 class="card-title">Eritrea</h6>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card border-0 h-50">
+            <img src="img/Nigeria.svg" class="card-img-top" alt="Nigeria">
+            <div class="card-body">
+              <h6 class="card-title">Nigérie</h6>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card border-0 h-50">
+            <img src="img/Etiopia.svg" class="card-img-top" alt="Etiopia">
+            <div class="card-body">
+              <h6 class="card-title">Etiopie</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="px-4 pt-5 my-5 text-block">
+      <h1 class="display-4 fw-bold text-center">Metodika</h1>
+      <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">Původně se autor chystal využít datové sady pro lokální změny:
+
+        <ul>
+          <li class="fw-bold lead">USGS Landsat 5 Surface Reflectance Tier 2</li>
+          <li class="fw-bold lead">USGS Landsat 7 Surface Reflectance Tier 2</li>
+          <li class="fw-bold lead">USGS Landsat 8 Surface Reflectance Tier 2</li>
+        </ul>
+
+        <p class="lead mb-4">Podobně jako WU a kolektiv s tím rozdílem, že by nevyužil takové množství indexů a
+          soustředil se primárně na NDVI.</p>
+        <p class="lead mb-4">Pro globální změny by pak využil derivované datové sady:</p>
+
+        <ul>
+          <li class="fw-bold lead">Landsat 5 TM Collection 1 Tier 1 8-Day NDVI Composite</li>
+          <li class="fw-bold lead">Landsat 7 TM Collection 1 Tier 1 8-Day NDVI Composite</li>
+          <li class="fw-bold lead">Landsat 8 TM Collection 1 Tier 1 8-Day NDVI Composite</li>
+        </ul>
+
+        <p class="lead mb-4">Tyto datové sady by pak poskytli snímky od roku 1974 do současnosti. Naneštěstí pro autora
+          snímků existuje velmi
+          málo snímků ze satelitů Landsat 5 a Landsat 7 v dané oblasti.</p>
+
+        <p class="lead mb-4"> Autor byl tedy nucen využít jiného poskytovatele datových sad. Rozhodl se pro MODIS. <br>
+          Díky tomu přišel o 26 let
+          snímků, získal tím vyšší dostupnost snímků a nemusel využívat více datových sad či jejich průniky. </p>
+
+        <p class="lead mb-4">Konkrétně šlo o tyto sady:</p>
+        <ul>
+          <li class="fw-bold lead">MOD13A1.006 Terra Vegetation Indices 16-Day Global 500m,</li>
+          <li class="fw-bold lead">MOD11A2.006 Terra Land Surface Temperature and Emissivity 8-Day Global 1km,</li>
+        </ul>
+
+        <p class="lead mb-4">Pro lepší mapové zpracování využil ještě datovou sadu pro definici hranic:</p>
+        <ul>
+          <li class="fw-bold lead">LSIB 2017: Large Scale International Boundary Polygons, Simplified</li>
+        </ul>
+
+        <p class="lead mb-4">Datová sada <strong class="fw-bold lead">MOD13A1.006</strong> byla využita pro výpočet
+          průměrného vegetačního
+          indexu v letech 2000 a 2020.
+          Stejného principu bylo využito i datové sady
+          <strong class="fw-bold lead">MOD11A2.006.</strong>, při měření průměrné teploty.
+        </p>
+
+        <p class="lead mb-4">Ukázka kódu (Justin Braaten, 2019): </p>
+        <pre><code class="language-js line-numbers">
+  var filteredImagesMedian = ee.ImageCollection.fromImages(years.map(function(y) {
+    var filtered = ee.List(ee.Image(filteredTempImg.filter(ee.Filter.calendarRange(
+    {
+      start: y,
+      field: 'year'
+    }
+    )).median()));
+    return filtered;
+  }));
+        </code></pre>
+      </div>
+
+      <div class="px-4 pt-5 my-5 text-block border-bottom">
+        <h1 class="display-4 fw-bold text-center">Pohyby pouští</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">Při zkoumání vegetačního indexu autor objevil, že se jeho hodnota během roku mění. Tuto
+            skutečnost následně vizualizoval v podobě videa.
+          </p>
+          <br>
+          <video width="100%" controls>
+            <source src="img/sahel_export.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <p class="mb-4 fw-light text-center">Sekvence snímků NDVI od 1.ledna 2000 do 31. prosince 2000 <br>
+            (Frekvence snímání - 8 dní)
+            <br>
+            (Počet snímků za vteřinu - 24)
+          </p>
+          <br>
+          <p class="lead mb-4">Je možné pozorovat, že NDVI je rostoucí od dubna do září, kdy maxima dosahuje na konci
+            tohoto období. Od prosince do dubna NDVI výrazně klesá, kde minima dosahuje právě v dubnu. (WU et al., 2020,
+            s. 11) </p>
+        </div>
+      </div>
+
+      <div class="px-4 pt-5 my-5 text-block border-bottom">
+        <h1 class="display-4 fw-bold text-center">Změna NDVI</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">V předchozí části webové prezentace byla ukázka změny NDVI a tudíž i pohybu vegetace.
+            Sloužila spíše pro představu, jakým způsobem se během roku vyvíjí krajina. Díky velkému množství snímků
+            použitého pro prezentaci pohybu by ale mohla čtenáři uniknout otázka daleko podstatnější. Jak se změnil
+            vegetační index od začátku měření?
+          </p>
+
+          <div id="mapsMedianVI"></div>
+          <p class="mb-4 fw-light text-center">Vlevo - Roční medián NDVI pro rok 2020 / Vpravo - Roční medián NDVI pro
+            rok 2000</p>
+          <br>
+          <p class="lead mb-4">Na mapě lze pozorovat změny, ale čtenář není schopen všimnout si všech podstatných. Proto
+            byla vytvořena mapa, která zobrazuje změny ve vegetačním indexu. </p>
+          <br>
+          <div id="mapDiffVI"></div>
+          <p class="mb-4 fw-light text-center">Signifikantí změny v ročním mediánu NDVI pro rok 2020 vůči roku 2000</p>
+          <br>
+          <p class="lead mb-4">V mapě nejsou zahrnuty veškeré změny. Byl vytvořen filtr, který zabraňuje přílišnému
+            vizuálnímu šumu. Díky filtru je čtenář schopen vidět změny, které byli opravdu signifikantní.
+            Velké změny jsou pozorovatelné na jihu Etiopie (oblast u národního parku Gambella), dále také na jihovýchodě
+            země (u hranic se Somálskem). Naneštěstí je tato skutečnost poměrně nepodstatná, jelikož tato oblast nepatří
+            přímo do oblasti GGW (Goffner, 2019, s. 2).</p>
+          <p class="lead mb-4">Podstatnou změnu lze pozorovat například v Senegalu na severu země u hranic s Mauretánií,
+            kudy zeď dle akčního plánu prochází (Goffner, 2019). Do roku 2015 v Senegalu bylo díky projektu “Velká
+            Zelená Zeď”
+            celkově obnoveno 27 tis. hektarů země. (Wu et al., 2020, 13), kde jistě podstatnou část tvoří nárůst NDVI v
+            této oblasti.
+          </p>
+        </div>
+      </div>
+
+      <div class="px-4 pt-5 my-5 text-block border-bottom">
+        <h1 class="display-4 fw-bold text-center">Změna teploty</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">Stejně jako v předchozí sekci práce je mapové zobrazení rozděleno na dvě části, první
+            část je porovnání:
+          </p>
+
+          <div id="mapsMedianT"></div>
+          <p class="mb-4 fw-light text-center">Vlevo - Roční medián teplot pro rok 2020 / Vpravo - Roční medián teplot
+            pro rok 2000</p>
+          <br>
+          <p class="lead mb-4">A druhá poté signifikantní změna: </p>
+          <br>
+          <div id="mapDiffT"></div>
+          <p class="mb-4 fw-light text-center">Signifikantí změny v ročním mediánu teplot pro rok 2020 vůči roku 2000
+          </p>
+          <br>
+          <p class="lead mb-4">V první mapě došlo ke znovuvyužití funkce pro vytvoření mediánu za kalendářní rok.
+            Konkrétně v tomto případě se jedná o medián teplot v roce 2000 a 2020.</p>
+          <p class="lead mb-4"> Na mapě lze
+            pozorovat velkou oblast, kde se teplota snížila, což odporuje starší studii od Hulme a kol. (2000), kteří při předpovídání
+            vývoje klimatu daným oblastem přisuzovali oteplení okolo 1°C.</p>
+          <p class="lead mb-4">Podobné výsledky má i novější studie, např.:
+            Ilori a kol. (2020), kde se na historických trendech ukazuje, že průměrná roční teplota roste a růst nadále
+            bude. Autor tuto chybu přisuzuje buď chybě v programu, případně by mohl být rok 2020 chladnější než je
+            medián v delším časovém horizontu. Autor textu považuje za vhodné příště využít pro měření změny mediánu
+            teplot delší časový úsek (např. 5 let)
+          </p>
+        </div>
+      </div>
+
+      <div class="px-4 pt-5 my-5 text-block border-bottom">
+        <h1 class="display-4 fw-bold text-center">Změna teploty</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">V předchozích částech webové prezentace byly zkoumány změny v NDVI a změny v teplotě.
+            Poslední část bude věnována propojení předchozích poznatků.Dle zjištění Sanzové a kol. (2021) existuje mezi
+            změnou NDVI a teploty silná korelace. Což i s připuštěním technické či statistické chyby lze pozorovat i v
+            následující mapě:
+          </p>
+          <p class="lead mb-4 fw-bold">Což i s připuštěním technické či statistické chyby lze pozorovat i v
+            následující mapě:</p>
+          <br>
+          <div id="mapsDiffVITemp"></div>
+          <p class="mb-4 fw-light text-center"> Porovnání změny teploty (vlevo) a NDVI (vpravo) pro rok 2020 vůči roku 2000
+          </p>
+          <br>
+          <p class="lead mb-4">Závislosti lze pozorovat v pásu okolo jižních hranic Senegalu, Mali,
+            Burkina Faso a Nigérie, kde se teplota zvyšovala a vegetační index se snižoval. Opačný případ pak lze
+            pozorovat již na dříve zmiňované území Etiopie (oblast u národního parku Gambella, u hranic se Somálskem).</p>
+        </div>
+      </div>
+
+      <div class="px-4 pt-5 my-5 text-block">
+        <h1 class="display-4 fw-bold text-center">Zdroje</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4 fw-bold">Odborná literatura</p>
+          <ul>
+            <li class="fw-normal lead">LEROUX, Louise, Agnès BÉGUÉ, Danny LO SEEN, Audrey JOLIVOT a Francois KAYITAKIRE.
+              Driving forces of recent vegetation changes in the Sahel: Lessons learned from regional and local level
+              analyses. <i>Remote Sensing of Environment</i> [online]. 2017, 191, 38-54 [cit. 2021-4-24]. ISSN 00344257.
+              Dostupné z: <a href="https://doi.org/10.1016/j.rse.2017.01.014">doi:10.1016/j.rse.2017.01.014</a></li>
+            <br>
+            <li class="fw-normal lead">GOFFNER, Deborah, Hanna SINARE a Line J. GORDON. The Great Green Wall for the
+              Sahara and the Sahel Initiative as an opportunity to enhance resilience in Sahelian landscapes and
+              livelihoods. <i>Regional Environmental Change</i> [online]. 2019, 19(5), 1417-1428 [cit. 2021-4-24]. ISSN
+              1436-3798. Dostupné z: <a
+                href="https://doi.org/10.1007/s10113-019-01481-z">doi:10.1007/s10113-019-01481-z</a></li>
+            <br>
+            <li class="fw-normal lead">WU, Shupu, Xin GAO, Jiaqiang LEI, Na ZHOU a Yongdong WANG. Spatial and Temporal
+              Changes in the Normalized Difference Vegetation Index and Their Driving Factors in the Desert/Grassland
+              Biome Transition Zone of the Sahel Region of Africa. <i>Remote Sensing</i> [online]. 2020, 12(24)
+              <br>[cit. 2021-4-24]. ISSN 2072-4292. Dostupné z: <a
+                href="https://doi.org/10.3390/rs12244119">doi:10.3390/rs12244119</a>
+            </li>
+            <br>
+            <li class="fw-normal lead">SANZ, Ernesto, Antonio SAA-REQUEJO, Carlos H. DÍAZ-AMBRONA, et al. Normalized
+              Difference Vegetation Index Temporal Responses to Temperature and Precipitation in Arid Rangelands.
+              <i>Remote
+                Sensing</i> [online]. 2021, 13(5) [cit. 2021-4-24]. ISSN 2072-4292. Dostupné z: <a
+                href="https://doi.org/10.3390/rs13050840">doi:10.3390/rs13050840</a>
+            </li>
+            <br>
+            <li class="fw-normal lead">HULME, M, R DOHERTY, T NGARA, M NEW a D LISTER. African climate change:
+              1900-2100. <i>Climate Research</i>
+              [online]. 2001, 17, 145-168 [cit. 2021-4-26]. ISSN 0936-577X. Dostupné z: <a
+                href="https://doi.org/10.3354/cr017145">doi:10.3354/cr017145</a></li>
+            <br>
+            <li class="fw-normal lead"> ILORI, Oluwaseun W. a Vincent O. AJAYI. Change Detection and Trend Analysis of
+              Future Temperature and
+              Rainfall over West Africa. <i>Earth Systems and Environment</i> [online]. 2020, 4(3), 493-512 [cit.
+              2021-4-26].
+              ISSN 2509-9426. Dostupné z: <a
+                href="https://doi.org/10.1007/s41748-020-00174-6">doi:10.1007/s41748-020-00174-6</a></li>
+          </ul>
+          <p class="lead mb-4 fw-bold">Ostatní</p>
+          <ul>
+            <li class="fw-normal lead">BRAATEN, Justin. Filter image collection with a month range for each year in
+              Google Earth Engine? In: <i>Geographic Information Systems Stack Exchange</i> [online] [cit. 24.04.2021].
+              Dostupné z:
+              <a
+                href="https://gis.stackexchange.com/questions/343871/filter-image-collection-with-a-month-range-for-each-year-in-google-earth-engine">
+                https://gis.stackexchange.com/questions/343871/filter-image-collection-with-a-month-range-for-each-year-in-google-earth-engine</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+
+      <link href="styles/prism.css" rel="stylesheet" />
+      <link href="styles/style.css" rel="stylesheet">
+
+      <script src="js/prism.js"></script>
+      <script src="js/maps.js"></script>
+
+      <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
